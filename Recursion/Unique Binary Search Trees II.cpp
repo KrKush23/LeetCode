@@ -10,17 +10,13 @@
 class Solution {
 public:
     vector<TreeNode*> generateTrees(int n) {
-        if(!n)  return vector<TreeNode*> {};
+        if(!n)  return {};
         return  helper(1,n);
     }
     vector<TreeNode*> helper(int start, int end){
         vector<TreeNode*> res{};
         if(start>end){
             res.push_back(NULL);
-            return res;
-        }
-        if(start==end){
-            res.push_back(new TreeNode(start));
             return res;
         }
         vector<TreeNode*> left{},right{};
