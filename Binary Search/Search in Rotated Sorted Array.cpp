@@ -24,6 +24,7 @@ public:
                     // inside straigth part
                     l=mid+1;
                 else
+                    // inside rotated part
                     r=mid-1;
             }
         }
