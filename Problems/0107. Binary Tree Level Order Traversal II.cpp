@@ -10,38 +10,32 @@
 #define pb push_back
 class Solution {
 public:
+    //=========== JUST NEED TO REVERSE THE BFS STORED BEFORE RETURNING ==========
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
         vector<vector<int>> ans{};
         if(root == NULL)
             return ans;
         queue<TreeNode*> q{};
-        q.push(root);
-        stack<int> node_counts{}, node_vals{};
+        vector<int> temp{};
         int nc{0};
+        // nc = node_count
+        q.push(root);
         TreeNode *node{};
         while(!q.empty()){
             nc=q.size();
-            node_counts.push(nc);
+            // To get all nodes of same level in one loop
             while(nc--){
                 node = q.front();
                 q.pop();
-                node_vals.push(node->val);
+                temp.pb(node->val);
                 if(node->left)  q.push(node->left);
                 if(node->right) q.push(node->right);
             }
-        }
-        vector<int> temp{};
-        while(!node_counts.empty()){
-            nc = node_counts.top();
-            node_counts.pop();
-            while(nc--){
-                temp.pb(node_vals.top());
-                node_vals.pop();
-            }
-            reverse(temp.begin(),temp.end());
             ans.pb(temp);
             temp.clear();
         }
+        //Reversing normal bfs of tree
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
