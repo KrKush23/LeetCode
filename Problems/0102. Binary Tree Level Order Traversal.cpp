@@ -16,7 +16,7 @@ public:
             return ans;
         queue<TreeNode*> q{};
         vector<int> temp{};
-        int nc{0},i{0};
+        int nc{0};
         // nc = node_count
         q.push(root);
         TreeNode *node{};
