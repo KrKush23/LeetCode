@@ -1,19 +1,13 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int min{INT_MAX},max{min},diff{0},max_diff{0};
+        int minPrice{INT_MAX}, maxProfit{0};
         for(auto i: prices){
-            if(i<min){
-                min=max=i;
-                diff=0;
-            }
-            else if(i>max){
-                max=i;
-                diff=max-min;
-                if(diff>max_diff)
-                    max_diff=diff;
-            }
+            if(i<minPrice)
+                minPrice=i;
+            else if(i-minPrice > maxProfit)
+                maxProfit = i - minPrice;
         }
-        return max_diff;
+        return maxProfit;
     }
 };
