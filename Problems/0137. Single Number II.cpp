@@ -1,8 +1,8 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        unsigned int l{0}, h{0};
-        for(unsigned int i:nums){
+        int l{0}, h{0};
+        for(auto i:nums){
             l = ~h & (l^i);
             h = ~l & (h^i);
         }
