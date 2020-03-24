@@ -1,7 +1,19 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        map<int,int> m{};
+        //============= USING BINARY SEARCH ==================
+        //========= Better Approach than hashing =============
+         int i=0, j=numbers.size()-1,sum=0;
+        while(i<j){
+            sum = numbers[i]+ numbers[j];
+            if(sum < target)        i++;
+            else if(sum > target)   j--;
+            else    break;
+        }
+        return {i+1, j+1};
+        
+        //================ USING HASH MAP ===================
+        /*map<int,int> m{};
         vector<int> ans(2,-1);
         int n = numbers.size();
         for(int i=0;i<n;i++){
@@ -14,5 +26,6 @@ public:
             }
         }
         return ans;
+        */
     }
 };
