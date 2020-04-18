@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int minStartValue(vector<int>& nums) {
+        int ans{INT_MAX},sum{};
+        for(auto i:nums){
+            sum+=i;
+            ans = min(sum,ans);
+        }
+        if(ans>0)
+            return 1;
+        return abs(ans)+1;
+    }
+};
