@@ -1,43 +1,62 @@
-#define pb push_back
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+
+        // TRANSPOSE
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i < j)
+                    swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+
+        //FLIP HORIZONTALLY
+        for (int i = 0; i < n; i++) {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+
+    }
+}; #define pb push_back
 class Solution {
     unordered_map<string, vector<pair<string, double>>> graph{};
 public:
     vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
         //Building a directed graph
-        for(int i=0; i<equations.size(); i++){
+        for (int i = 0; i < equations.size(); i++) {
             graph[equations[i][0]].pb({equations[i][1], values[i]});
-            graph[equations[i][1]].pb({equations[i][0], 1.0/values[i]});
+            graph[equations[i][1]].pb({equations[i][0], 1.0 / values[i]});
         }
-        
+
         //Solution
         vector<double> res{};
-        for(auto i:queries){
+        for (auto i : queries) {
             string src{i[0]}, dest{i[1]};
-            
+
             unordered_set<string> visited{};
-            double ans{-1};
-            
-            if(graph.count(src))
+            double ans{ -1};
+
+            if (graph.count(src))
                 dfs(src, dest, visited, ans, 1.0);
-            
+
             res.pb(ans);
         }
         return res;
     }
-    
-    void dfs(string src, string dest, unordered_set<string>& visited, double& ans, double temp){
-        if(visited.count(src))  return;
-        
+
+    void dfs(string src, string dest, unordered_set<string>& visited, double& ans, double temp) {
+        if (visited.count(src))  return;
+
         visited.insert(src);
-        if(src == dest){
+        if (src == dest) {
             ans = temp;
             return;
         }
-        
-        for(auto nbr:graph[src]){
+
+        for (auto nbr : graph[src]) {
             //Multiplying the values of each step towards the destination
-            dfs(nbr.first, dest, visited, ans, temp*nbr.second);
+            dfs(nbr.first, dest, visited, ans, temp * nbr.second);
         }
-        
+
     }
 };
