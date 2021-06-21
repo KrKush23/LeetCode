@@ -13,7 +13,7 @@ class Solution {
     vector<int> v;
 public:
     TreeNode* balanceBST(TreeNode* root) {        
-        // get inorder of the tree .. sort it
+        // get inorder of the tree
         // ITERATIVE INORDER
         stack<TreeNode*> st;
         while(true){
@@ -29,8 +29,6 @@ public:
             
             root = root->right; //RIGHT
         }
-        
-        sort(v.begin(), v.end()); // sort it
         
         //build new tree;
         return buildTree(0, v.size()- 1);
