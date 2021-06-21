@@ -29,7 +29,7 @@ public:
         TreeNode *node = new TreeNode(nodeVal); // create node with value
         
         //in inorder...left of nodeVal..is left subtree
-        //in inorder...right of nodeVal..is tight subtree
+        //in inorder...right of nodeVal..is right subtree
         node->left = helper(preorder, l, inIdx[nodeVal] - 1);  // call left firts..as values are decide by preIdx
         node->right= helper(preorder, inIdx[nodeVal] + 1, r); 
         
