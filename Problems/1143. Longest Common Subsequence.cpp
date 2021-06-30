@@ -17,7 +17,7 @@ public:
         
         // TOP-DOWN APPROACH ===================
         // =====================================
-        
+        /*
         vector<vector<int>> dp(n+1, vector<int> (m+1, 0));
         
         for(int i=1; i<=n; i++){
@@ -30,6 +30,24 @@ public:
         }
         
         return dp[n][m];
+        */
+        
+        // TOP-DOWN APPROACH ===================
+        // space optimized ====================
+        vector<vector<int>> dp(2, vector<int> (m+1, 0));
+        bool bi{0};
+        
+        for(int i=1; i<=n; i++){
+            bi = i&1; // even&1 = 0, odd&1 = 1
+            for(int j=1; j<=m; j++){
+                if(text1[i-1] == text2[j-1])
+                    dp[bi][j] = 1 + dp[1-bi][j-1]; // 1-bi instead of i-1...for keeping index +ve
+                else
+                    dp[bi][j] = max(dp[1-bi][j], dp[bi][j-1]);
+            }
+        }
+        
+        return dp[bi][m];
         
     }
 };
