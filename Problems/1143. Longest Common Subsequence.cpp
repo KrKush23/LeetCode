@@ -49,5 +49,24 @@ public:
         
         return dp[bi][m];
         
+        // PRINTING LCS
+        /*
+        vector<int> lcs(dp[n][m]);
+        // Creating the lcs from marked characters
+        int i{dp[n][m] - 1};
+        while (n > 0 and m > 0) {
+	        if (a[n - 1] == b[m - 1]) { // if equal char...take it..decrease both
+		        lcs[i] = a[n - 1];
+		        n--; m--; i--;
+	        }
+	        else if (dp[n - 1][m] > dp[n][m - 1]) // go where dp[][] stays same..so find max of both possible
+		        n--;
+	        else
+		        m--;
+        }
+        
+        NOTE: if push_backing REVERSE AT LAST
+        */
+        
     }
 };
