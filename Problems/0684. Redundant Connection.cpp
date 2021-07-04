@@ -18,7 +18,7 @@ public:
             int u = find(e[0]);
             int v = find(e[1]);
             
-            if(u==v)
+            if(u==v) // if 2 nodes with same parent are found -> this edge in REDUNDANT
                 res = e;
             else
                 par[v] = u;
