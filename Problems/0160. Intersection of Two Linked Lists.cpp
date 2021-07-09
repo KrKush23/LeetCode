@@ -11,6 +11,9 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         if(!headA or !headB)
             return NULL;
+        
+        // NAIVE APPROACH ===================================
+        /*
         ListNode *tempA {headA}, *tempB {headB};
         int countA{0},countB{0};
         while(tempA){
@@ -38,5 +41,19 @@ public:
             tempB = tempB->next;
         }
         return NULL;
+        */
+        
+        // CONSISE CODE ===============
+        ListNode *a {headA}, *b {headB};
+        
+        while(a != b){
+            a = (a == NULL) ? headB : a->next;
+            b = (b == NULL) ? headA : b->next;
+        }
+        
+        return a;
     }
 };
+
+// Explanation for CONCISE code
+// https://www.youtube.com/watch?v=u4FWXfgS8jw&list=PLgUwDviBIf0r47RKH7fdWN54AbWFgGuii&index=7
