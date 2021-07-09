@@ -7,25 +7,7 @@
  * };
  */
 class Solution {
-public:
-    bool isPalindrome(ListNode* head) {
-        ListNode *slow {head}, *fast {head};
-        while(fast and fast->next){
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        slow = reversed(slow);  // reverses the right half of given linked list
-        fast = head;            // fast goes back to head
-        while(slow){
-            if(slow->val != fast->val)
-                return false;
-            slow = slow->next;
-            fast = fast->next;
-        }
-        return true;
-    }
-    // For reversing the right half of the given linked list
-    ListNode* reversed(ListNode* head){
+    ListNode* reverse(ListNode* head){
         ListNode *prev {}, *next{};
         while(head){
             next = head->next;
@@ -34,5 +16,31 @@ public:
             head = next;
         }
         return prev;
+    }
+public:
+    bool isPalindrome(ListNode* head) {
+        if(!head or !head->next)
+            return true;
+        
+        // FIND MIDDLE
+        ListNode *slow {head}, *fast {head};
+        while(fast->next and fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        // reverse right half
+        slow->next = reverse(slow->next);
+        slow = slow->next;  // move slow to head of right half
+        fast = head;        // move fast to head
+        
+        //check for PALINDROME
+        while(slow){
+            if(slow->val != fast->val)
+                return false;
+            slow = slow->next;
+            fast = fast->next;
+        }
+        return true;
     }
 };
