@@ -13,17 +13,21 @@ public:
         ListNode *cur=dummyHead;
         int carry{0};
         while(l1 != NULL || l2 != NULL){
-            int x = (l1!=NULL)?l1->val:0;
-            int y = (l2!=NULL)?l2->val:0;
-            int sum = carry + x + y;
+            int sum = carry;
+            sum += (l1!=NULL) ? l1->val : 0;
+            sum += (l2!=NULL) ? l2->val : 0;
+            
             carry = sum/10;
-            cur->next = new ListNode(sum%10);
+            cur->next = new ListNode(sum%10); //create new node
             cur = cur->next;
+            
             if(l1!=NULL)    l1=l1->next;
             if(l2!=NULL)    l2=l2->next;
         }
+        //AT last
         if(carry>0)
             cur->next = new ListNode(carry);
+        
         return dummyHead->next;
     }
 };
