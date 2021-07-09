@@ -13,7 +13,7 @@ public:
     ListNode* reverseList(ListNode* head) {
         // ITERATIVE ==========
         // ListNode *cur=head, *prev=NULL, *next=NULL;
-        // while(cur!= NULL){
+        // while(cur!= NULL){ // 4 STEPS
         //     next = cur->next;
         //     cur->next = prev;
         //     prev=cur;
