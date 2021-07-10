@@ -9,17 +9,19 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode *slow_p{head}, *fast_p{head};
-        while(fast_p and fast_p->next){
-            slow_p = slow_p->next;
-            fast_p = fast_p->next->next;
-            if(slow_p ==fast_p){
-                slow_p =head;
-                while(slow_p!=fast_p){
-                    slow_p = slow_p->next;
-                    fast_p = fast_p->next;
+        ListNode *slow{head}, *fast{head};
+        
+        while(fast and fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            if(slow ==fast){
+                slow =head;
+                while(slow!=fast){ // WILL MEET AT START OF LOOP 
+                    slow = slow->next;
+                    fast = fast->next;
                 }
-                return slow_p;
+                return slow;
             }
         }
         return NULL;
