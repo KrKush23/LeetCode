@@ -30,6 +30,10 @@ public:
         len = s.length();
         res.clear();
         
+        // IP can't be formed
+        if(s.length() < 4 or s.length() > 12)
+            return res;
+        
         backtrack(0, 0, "");
         return res;
     }
