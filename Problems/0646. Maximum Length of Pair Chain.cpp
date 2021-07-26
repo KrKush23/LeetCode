@@ -2,6 +2,7 @@ class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
         // GREEEDY ALGO ============================
+        // O(n logn) - time
         sort(pairs.begin(), pairs.end(), [](vector<int>& a, vector<int>& b){
             return a[1] < b[1];
         });
@@ -19,6 +20,7 @@ public:
         return res;     
         
         // DP - like LIS ==============================
+        // O(n^2) - time
         sort(pairs.begin(), pairs.end(), [](vector<int>& a, vector<int>& b){
             return a[1] < b[1];
         });
