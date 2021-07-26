@@ -1,20 +1,39 @@
 class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
-        int n = pairs.size();
-        if(n<2) return n;
-        
+        // GREEEDY ALGO ============================
         sort(pairs.begin(), pairs.end(), [](vector<int>& a, vector<int>& b){
-            return a[1] < b[1]; // sort a/c to RIGHT
+            return a[1] < b[1];
         });
         
-        int res{1}, last{pairs[0][1]};
-        for(int i=1; i<n; i++){
-            if(pairs[i][0] > last){
+        int res = 0;
+        int cur = INT_MIN;
+        
+        for(auto pair: pairs){
+            if(cur < pair[0]){
+                cur = pair[1];
                 res++;
-                last = pairs[i][1];
             }
         }
-        return res;        
+        
+        return res;     
+        
+        // DP - like LIS ==============================
+        sort(pairs.begin(), pairs.end(), [](vector<int>& a, vector<int>& b){
+            return a[1] < b[1];
+        });
+        
+        int n = pairs.size();
+        vector<int> lis(n, 1);
+        
+        for (int i=0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if(pairs[i][0] > pairs[j][1])
+                    lis[i] = max(lis[i], lis[j] + 1);
+                else
+                    lis[i] = max(lis[i], lis[j]);
+            }
+        }
+        return lis.back();
     }
 };
