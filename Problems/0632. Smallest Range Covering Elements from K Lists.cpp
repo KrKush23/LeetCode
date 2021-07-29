@@ -32,15 +32,15 @@ public:
             auto cur = pq.top();
             pq.pop();
             
-            ++cur.F;
+            cur.F++;
             if(cur.F == cur.S) // at least 1 list completely traversed
                 break;
             // push next of smallest
             pq.push(cur);
             
             // now compare the range
-            lo = *pq.top().F;
-            hi = max(hi, *cur.F);
+            lo = *pq.top().F;       // lowest in HEAP (1st one)
+            hi = max(hi, *cur.F);   // previuos 'hi' or the newest element in HEAP
             
             if(hi - lo < res[1] - res[0])
                 res = {lo, hi};
@@ -49,6 +49,4 @@ public:
     }
 };
 
- // NOTE: we need iterators because all the lists are not of same size
-
-
+ // NOTE: we need iterators because ALL LISTS ARE NOT OF THE SAME SIZE
