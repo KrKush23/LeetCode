@@ -1,7 +1,7 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        // Dynamic Programming - SPACE - O(n)
+        // Dynamic Programming - SPACE - O(n) =======================================
         /*
         if(height.size()==0)
             return 0;
@@ -24,7 +24,7 @@ public:
         return res;
         */
         
-        // 2 POINTERS - Space - O(1)
+        // 2 POINTERS - Space - O(1) ========================================
         int total = 0;
         int left = 0, right = height.size()-1;
         int left_max = 0, right_max = 0;
