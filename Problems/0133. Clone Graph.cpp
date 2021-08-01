@@ -23,6 +23,7 @@ class Solution {
 	void dfs(Node* cur, Node* node, vector<Node*> &visited) {
 		// Store the clone
 		visited[node->val] = node;
+        
 		for (auto i : cur->neighbors) {
 			if (visited[i->val] == NULL) {
 				Node* newnode = new Node(i->val);
@@ -41,7 +42,7 @@ public:
 		// visited array will store the corresponding clones
 		vector<Node*> visited(1000, NULL);
 
-		// Clone of root node and storing clone in VISITED
+		// Cloning root node and storing clone in VISITED
 		Node* root = new Node(node->val);
 		visited[node->val] = root;
 
@@ -60,6 +61,7 @@ public:
 				(root->neighbors).push_back(visited[cur->val]);
 			}
 		}
+        // returning clone of STARTING NODE
 		return root;
 	}
 };
