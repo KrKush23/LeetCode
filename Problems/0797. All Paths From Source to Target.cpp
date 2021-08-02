@@ -7,15 +7,18 @@ public:
 		dfs(0, path, graph);
 		return res;
 	}
+    
 	void dfs(int node, vector<int> path, vector<vector<int>>& graph) {
-		path.pb(node);
-		if (node == graph.size() - 1) {
+		path.pb(node); //add to path
+        
+		if (node == graph.size() - 1) { // check if reached destination
 			res.pb(path);
 			return;
 		}
-		for (auto nbr : graph[node]) {
+        
+		for (auto nbr : graph[node]) // dfs
 			dfs(nbr, path, graph);
-		}
+
 		return;
 	}
 };
