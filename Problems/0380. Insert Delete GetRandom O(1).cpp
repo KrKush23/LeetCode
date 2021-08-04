@@ -1,34 +1,31 @@
 class RandomizedSet {
     vector<int> nums{};
-    map<int,int> m{};
-public:
-    /** Initialize your data structure here. */
-    RandomizedSet() {
-        
-    }
+    map<int,int> m{}; // {val, index in array}
     
+public:    
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     bool insert(int val) {
-        if(m.find(val)==m.end()){
+        if(!m.count(val)){ // if not PRESENT already
+            m[val] = nums.size();
             nums.emplace_back(val);
-            m[val] = nums.size()-1;
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
     
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     bool remove(int val) {
-        if(m.find(val)!= m.end()){
-            int i = m[val];
-            m[nums[nums.size()-1]] = i;
-            nums[i] = nums[nums.size()-1];
-            nums.pop_back();
-            m.erase(val);
-            cout<<endl;
-            return 1;
+        if(m.count(val)){ // if FOUND
+            int idx = m[val];                 // getting index of 'val'
+            m[nums[nums.size()-1]] = idx;     // updating index of last element as 'idx'
+            nums[idx] = nums[nums.size()-1];  // braing last element to 'idx'
+            
+            nums.pop_back();    // removing from vector
+            m.erase(val);       // removin from map
+            // cout<<endl;
+            return true;
         }
-        return 0;
+        return false;
     }
     
     /** Get a random element from the set. */
