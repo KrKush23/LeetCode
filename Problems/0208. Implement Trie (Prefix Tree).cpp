@@ -1,47 +1,47 @@
+struct TrieNode{
+    bool end{false};
+    TrieNode* children[26] = {nullptr};
+};
+
 class Trie {
-    vector<Trie*> children;
-    bool isEnd;
+    TrieNode *root;
 public:
     /** Initialize your data structure here. */
     Trie() {
-        isEnd = 0;
-        children.resize(26, nullptr);
+        root = new TrieNode();
     }
     
     /** Inserts a word into the trie. */
     void insert(string word) {
-        Trie* cur{this};
+        TrieNode *cur = root;
         for(char c:word){
-            int idx = c-'a';
-            if(!cur->children[idx])
-                cur->children[idx] = new Trie();
-            cur = cur->children[idx];
+            if(cur->children[c-'a'] == nullptr)
+                cur->children[c-'a'] = new TrieNode();
+            cur = cur->children[c-'a'];
         }
-        cur->isEnd = true;
+        cur->end = true;
     }
     
     /** Returns if the word is in the trie. */
     bool search(string word) {
-        Trie* cur{this};
+        TrieNode *cur = root;
         for(char c:word){
-            int idx = c-'a';
-            if(!cur->children[idx])
-                return 0;
-            cur = cur->children[idx];
+            if(cur->children[c-'a'] == nullptr)
+                return false;
+            cur = cur->children[c-'a'];
         }
-        return cur->isEnd;
+        return cur->end;
     }
     
     /** Returns if there is any word in the trie that starts with the given prefix. */
     bool startsWith(string prefix) {
-        Trie* cur{this};
+        TrieNode *cur = root;
         for(char c:prefix){
-            int idx = c-'a';
-            if(!cur->children[idx])
-                return 0;
-            cur = cur->children[idx];
+            if(cur->children[c-'a'] == nullptr)
+                return false;
+            cur = cur->children[c-'a'];
         }
-        return 1;
+        return true;
     }
 };
 
