@@ -1,21 +1,19 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int n = s.length();
-        set<char> seen{};
-        int ans{},i{},j{};
-        // sliding window
-        // i -> left end of window
-        // j -> right end of window
-        while(i<n and j<n){
-            if(seen.find(s[j])==seen.end()){
-                seen.insert(s[j++]);
-                ans = max(ans, j-i);
-                // j-i -> size of window
-            }
-            else
-                seen.erase(s[i++]);
+        vector<int> dict(256, -1);
+        
+        int start = -1;
+        int res{};
+        
+        for(int i=0; i<s.length(); i++){
+            // to make jump instead of coming  1 step at a time
+            start = max(start, dict[s[i]] + 1); 
+            
+            dict[s[i]] = i;
+            res = max(res, i - start + 1);
         }
-        return ans;
+        
+        return res;
     }
 };
