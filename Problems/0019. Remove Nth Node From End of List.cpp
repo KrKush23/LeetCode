@@ -15,7 +15,7 @@ public:
         
         ListNode *fast{dummy}, *slow{dummy};
         // FAST goes ahead 'n' nodes
-        while(n--)
+        while(fast->next and n--)
             fast=fast->next;
         
         // now FAST and SLOW...move 1 step at a time..till FAST is LAST node
