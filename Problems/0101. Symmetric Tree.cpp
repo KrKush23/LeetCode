@@ -4,38 +4,24 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
+    bool isMirror(TreeNode* L, TreeNode* R){
+        if(!L and !R) // BOTH NULL
+            return true;
+        if(!L or !R)  // 1 is NULL
+            return false;
+        if(L->val != R->val)    // UNEQUAL values
+            return false;
+        
+        return isMirror(L->left, R->right) and isMirror(L->right, R->left);
+    }
 public:
     bool isSymmetric(TreeNode* root) {
-        return root == NULL || isMirror(root->left,root->right);
+        return (!root) or isMirror(root->left, root->right);
     }
-    bool isMirror(TreeNode* leftRoot, TreeNode* rightRoot){
-        //both are NULL
-        if(leftRoot == NULL and rightRoot == NULL)  return true;
-        //both have values
-        else if(leftRoot !=NULL and rightRoot != NULL){
-            //same values
-            if(leftRoot->val == rightRoot->val)
-                return isMirror(leftRoot->left,rightRoot->right) and isMirror(leftRoot->right,rightRoot->left);
-            //otherwise
-            return false;
-        }
-        //other cases
-        return false;
-    }
-    //================SHORTER ISMIRROR FUNCTION============================
-    
-    // bool isMirror(TreeNode* leftRoot, TreeNode* rightRoot){
-    //     //both are NULL
-    //     if(leftRoot == NULL and rightRoot == NULL)  return true;
-    //     //one is NULL
-    //     if(leftRoot == NULL or rightRoot == NULL)  return false;
-    //     //both have values
-    //     return   (leftRoot->val == rightRoot->val) 
-    //              and isMirror(leftRoot->left,rightRoot->right) 
-    //              and isMirror(leftRoot->right,rightRoot->left);
-    // }
 };
