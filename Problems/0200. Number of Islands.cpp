@@ -6,19 +6,19 @@ public:
             for(int j=0; j<grid[i].size();j++){
                 if(grid[i][j]=='1'){
                     cnt++;
-                    callbfs(grid, i, j);
+                    dfs(grid, i, j);
                 }
             }
         }
         return cnt;
     }
-    void callbfs(vector<vector<char>>& grid, int i, int j){
+    void dfs(vector<vector<char>>& grid, int i, int j){
         if(i<0 || j < 0  || i >= grid.size() || j >= grid[i].size() || grid[i][j]=='0')
             return ;
         grid[i][j]='0';
-        callbfs(grid, i+1, j);  //down
-        callbfs(grid, i, j+1);  //right
-        callbfs(grid, i-1, j);  //up
-        callbfs(grid, i, j-1);  //left
+        dfs(grid, i+1, j);  //down
+        dfs(grid, i, j+1);  //right
+        dfs(grid, i-1, j);  //up
+        dfs(grid, i, j-1);  //left
     }
 };
