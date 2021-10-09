@@ -7,28 +7,35 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-#define pb push_back
 class Solution {
-public:
-    vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<vector<int>> ans{};
-        vector<int> temp{};
-        if(!root)                           
-            return ans;
-        helper(ans, temp, root, sum);
-        return ans;
-    }
-    void helper(vector<vector<int>> &ans, vector<int> &temp, TreeNode* root, int sum){
+    vector<vector<int>> res{};
+    vector<int> cur{};
+    
+    void helper(TreeNode* root, int sum){
         if(!root)
             return;
-        temp.pb(root->val);
+        
+        cur.push_back(root->val);
         if(!root->left and !root->right and sum==root->val){
-            ans.pb(temp);
+            res.push_back(cur);
+            cur.pop_back();
             return;
         }
-        helper(ans, temp, root->left, sum-root->val);
-        if(root->left)  temp.pop_back();                //******IMPORTANT*******
-        helper(ans, temp, root->right, sum-root->val);
-        if(root->right) temp.pop_back();                //******IMPORTANT*******
+        
+        helper(root->left, sum-root->val);
+        helper(root->right, sum-root->val);
+        
+        cur.pop_back();
+    }
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        res.clear();
+        cur.clear();
+        
+        if(!root)
+            return res;
+        
+        helper(root, sum);
+        return res;
     }
 };
